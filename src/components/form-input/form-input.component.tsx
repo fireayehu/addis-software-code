@@ -21,6 +21,10 @@ export const FormInput: React.FC<Props> = ({
       type={type}
       name={name}
       placeholder={placeholder ? placeholder : ''}
+      width="100%"
+      p={4}
+      mt={3}
+      mb={4}
     />
   </div>
 );

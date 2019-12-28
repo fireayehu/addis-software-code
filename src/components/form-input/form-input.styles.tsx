@@ -1,12 +1,12 @@
 import styled from 'styled-components';
+import { layout, space, LayoutProps, SpaceProps } from 'styled-system';
 
-export const Input = styled.input`
-  width: 100%;
-  padding: 12px;
+interface FormInputProps extends LayoutProps, SpaceProps {}
+export const Input = styled.input<FormInputProps>`
+  ${layout}
+  ${space}
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
   resize: vertical;
 `;

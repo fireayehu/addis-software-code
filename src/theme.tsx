@@ -30,6 +30,8 @@ export const theme = {
   ],
   colors: {
     teal: ['#4db6ac'],
+    green: ['#008b00'],
+    red: ['#ed3330'],
     black: '#000',
     'near-black': '#111',
     'dark-gray': '#333',

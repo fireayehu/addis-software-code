@@ -1,14 +1,7 @@
 import styled from 'styled-components';
+import { space, SpaceProps } from 'styled-system';
 
-export const Row = styled.div`
-  width: 100%;
-  content: '';
-  display: table;
-  clear: both;
-`;
-
-export const Col = styled.div`
-  width: 30%;
-  float: left;
-  padding: 10px;
+interface HomePageProps extends SpaceProps {}
+export const HomePageContainer = styled.div<HomePageProps>`
+  ${space}
 `;
