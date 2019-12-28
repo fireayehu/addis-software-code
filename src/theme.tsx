@@ -36,7 +36,7 @@ export const theme = {
     'near-black': '#111',
     'dark-gray': '#333',
     'mid-gray': '#555',
-    gray: ['#777', '#818181'],
+    gray: ['#777', '#818181', '#f2f2f2'],
     silver: '#999',
     'light-silver': '#aaa',
     'moon-gray': '#ccc',
