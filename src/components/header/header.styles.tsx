@@ -5,6 +5,7 @@ export const HeaderContainer = styled.div`
   width: 100%;
   background-color: #fff;
   position: relative;
+  margin-bottom: 30px;
 `;
 
 export const HeaderTitle = styled.h1`
