@@ -10,6 +10,7 @@ import Header from './components/header/header.component';
 
 //PAGES
 import Homepage from './pages/home-page/home-page.component';
+import AddEmployeePage from './pages/add-employee-page/add-employee-page.component';
 
 import './App.css';
 
@@ -40,6 +41,7 @@ class App extends React.Component<Props, State> {
           />
           <Switch>
             <Route exact path="/" component={Homepage} />
+            <Route path="/employee/new" component={AddEmployeePage} />
           </Switch>
         </MainContent>
       </div>
