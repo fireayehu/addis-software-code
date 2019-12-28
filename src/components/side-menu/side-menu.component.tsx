@@ -5,7 +5,9 @@ interface Props {
   isOpen: boolean;
 }
 const SideMenu: React.FC<Props> = ({ isOpen, children }) => (
-  <SideMenuContainer isOpen={isOpen}>{children}</SideMenuContainer>
+  <SideMenuContainer width={isOpen ? 9 : 0} height="100%" bg="white" pt={6}>
+    {children}
+  </SideMenuContainer>
 );
 
 export default SideMenu;

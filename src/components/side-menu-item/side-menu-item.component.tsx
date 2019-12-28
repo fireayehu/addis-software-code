@@ -7,7 +7,18 @@ interface Props {
   exact?: boolean;
 }
 const SideMenuItem: React.FC<Props> = ({ text, to }) => (
-  <SideMenuItemContainer to={to}>{text}</SideMenuItemContainer>
+  <SideMenuItemContainer
+    to={to}
+    m={3}
+    fontSize={3}
+    color="gray.1"
+    pt={3}
+    pl={3}
+    pb={3}
+    pr={5}
+  >
+    {text}
+  </SideMenuItemContainer>
 );
 
 export default SideMenuItem;
