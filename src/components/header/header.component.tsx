@@ -6,9 +6,13 @@ interface Props {
   handleToggle: () => void;
 }
 const Header: React.FC<Props> = ({ title, handleToggle }) => (
-  <HeaderContainer>
-    <ToggleIcon onClick={handleToggle}>&#9776;</ToggleIcon>
-    <HeaderTitle>{title}</HeaderTitle>
+  <HeaderContainer height={6} width="100%" bg="white" mb={5}>
+    <ToggleIcon onClick={handleToggle} fontSize={6} mr={4} color="teal.0">
+      &#9776;
+    </ToggleIcon>
+    <HeaderTitle fontSize={4} color="teal.0" p={3}>
+      {title}
+    </HeaderTitle>
   </HeaderContainer>
 );
 

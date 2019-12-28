@@ -1,23 +1,38 @@
 import styled from 'styled-components';
+import {
+  layout,
+  space,
+  color,
+  fontSize,
+  LayoutProps,
+  SpaceProps,
+  ColorProps,
+  FontSizeProps
+} from 'styled-system';
 
-export const HeaderContainer = styled.div`
-  height: 50px;
-  width: 100%;
-  background-color: #fff;
+interface HeaderProps
+  extends LayoutProps,
+    SpaceProps,
+    ColorProps,
+    FontSizeProps {}
+
+export const HeaderContainer = styled.div<HeaderProps>`
+  ${layout}
+  ${color}
+  ${space}
   position: relative;
-  margin-bottom: 30px;
 `;
 
-export const HeaderTitle = styled.h1`
+export const HeaderTitle = styled.h1<HeaderProps>`
+  ${fontSize}
+  ${space}
+  ${color}
   display: inline-block;
-  font-size: 22px;
-  color: #4db6ac;
-  padding: 10px 10px 10px 10px;
 `;
 
-export const ToggleIcon = styled.span`
-  font-size: 30px;
+export const ToggleIcon = styled.span<HeaderProps>`
+  ${fontSize}
+  ${space}
+  ${color}
   cursor: pointer;
-  margin-right: 15px;
-  color: #4db6ac;
 `;
