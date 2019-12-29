@@ -6,7 +6,7 @@ import { EmpolyeeActionTypes } from './employee.types';
 function* fetchEmployeeAsync() {
   try {
     const response = yield fetch(
-      'http://dummy.restapiexample.com/api/v1/employees'
+      'https://dummy.restapiexample.com/api/v1/employees'
     );
     const employees = yield response.json();
 
