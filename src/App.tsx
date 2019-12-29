@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 //COMPONENTS
 import SideMenu from './components/side-menu/side-menu.component';
@@ -42,6 +42,7 @@ class App extends React.Component<Props, State> {
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route path="/employee/new" component={AddEmployeePage} />
+            <Redirect to="/" />
           </Switch>
         </MainContent>
       </div>
