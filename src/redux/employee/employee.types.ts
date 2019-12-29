@@ -13,6 +13,7 @@ export const EmpolyeeActionTypes = {
   DELETE_EMPLOYEE_FAILURE: 'DELETE_EMPLOYEE_FAILURE'
 };
 export interface Employee {
+  id?: string;
   employee_name: string;
   employee_salary: string;
   employee_age: string;

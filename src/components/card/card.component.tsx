@@ -8,20 +8,29 @@ import {
   ContentContainer,
   CardButton
 } from './card.styles';
+import { Employee } from '../../redux/employee/employee.types';
 
-const Card = () => (
+interface Props {
+  employee: Employee;
+}
+
+const Card: React.FC<Props> = ({ employee }) => (
   <CardContainer width="100%">
     <Image src={Avatar} width="100%" />
     <ContentContainer py={1} px={4}>
       <h4>
-        <b>Jane Doe</b>
+        <b>
+          {employee.employee_name.length > 25
+            ? `${employee.employee_name.slice(0, 25)}...`
+            : employee.employee_name}
+        </b>
       </h4>
       <Row width="100%">
         <Col width="50%">
-          <p>Age | 21 </p>
+          <p>Age | {employee.employee_age} </p>
         </Col>
         <Col width="50%">
-          <p>Salary | 24938</p>
+          <p>Salary | {employee.employee_salary}</p>
         </Col>
         <Col width="50%" pb={3}>
           <CardButton color="white" p={3} bg="green.0">
