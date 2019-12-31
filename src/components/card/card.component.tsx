@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import Avatar from './../../assets/avatar.png';
 import Row from './../row/row.component';
 import Col from './../col/col.component';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { Employee } from '../../redux/employee/employee.types';
+import { deleteEmployeeStart } from '../../redux/employee/empolyee.actions';
 import {
   CardContainer,
   Image,
@@ -17,8 +18,6 @@ import {
   CardTitle,
   CardText
 } from './card.styles';
-import { Employee } from '../../redux/employee/employee.types';
-import { deleteEmployeeStart } from '../../redux/employee/empolyee.actions';
 
 interface Props extends RouteComponentProps {
   employee: Employee;

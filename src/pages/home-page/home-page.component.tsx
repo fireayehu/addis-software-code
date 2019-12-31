@@ -2,16 +2,18 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
 import Card from './../../components/card/card.component';
 import Row from './../../components/row/row.component';
 import Col from './../../components/col/col.component';
+import Loader from '../../components/loader/loader.component';
+
 import { HomePageContainer } from './home-page.styles';
+import { Employee } from '../../redux/employee/employee.types';
 import {
   selectEmployees,
   selectLoading
 } from './../../redux/employee/employee.selectors';
-import { Employee } from '../../redux/employee/employee.types';
-import Loader from '../../components/loader/loader.component';
 
 interface Props {
   employess: Employee[];

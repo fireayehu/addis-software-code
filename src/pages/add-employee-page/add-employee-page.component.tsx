@@ -4,23 +4,24 @@ import { connect } from 'react-redux';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-import { Container } from './add-employee.styles';
 import FormInput from './../../components/form-input/form-input.component';
 import Row from './../../components/row/row.component';
 import Col from './../../components/col/col.component';
 import CustomButton from './../../components/custom-button/custom-button.component';
+import Loader from '../../components/loader/loader.component';
+
+import { createStructuredSelector } from 'reselect';
+import { Container } from './add-employee.styles';
 import {
   createEmployeeStart,
   setSuccessfulStart
 } from './../../redux/employee/empolyee.actions';
-
-import { createStructuredSelector } from 'reselect';
 import {
   selectLoading,
   selectError,
   selectSuccessful
 } from '../../redux/employee/employee.selectors';
-import Loader from '../../components/loader/loader.component';
+
 interface Props {
   createEmployeeStart: any;
   setSuccessfulStart: any;
