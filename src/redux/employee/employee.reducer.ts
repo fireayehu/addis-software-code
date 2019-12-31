@@ -3,6 +3,7 @@ import {
   EmpolyeeActionTypes,
   EmpolyeeActionTypesProps
 } from './employee.types';
+import { removeEmployee, updateEmployee } from './employee.util';
 
 const INITIAL_STATE: EmployeeState = {
   employees: [],
@@ -16,6 +17,9 @@ const employeeReducer = (
 ) => {
   switch (action.type) {
     case EmpolyeeActionTypes.FETCH_EMPLOYEE_START:
+    case EmpolyeeActionTypes.CREATE_EMPLOYEE_START:
+    case EmpolyeeActionTypes.UPDATE_EMPLOYEE_START:
+    case EmpolyeeActionTypes.DELETE_EMPLOYEE_START:
       return {
         ...state,
         loading: true
@@ -26,12 +30,34 @@ const employeeReducer = (
         loading: false,
         employees: action.payload
       };
+    case EmpolyeeActionTypes.CREATE_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        employees: [...state.employees, action.payload]
+      };
+    case EmpolyeeActionTypes.UPDATE_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        employees: updateEmployee(state.employees, action.payload)
+      };
+    case EmpolyeeActionTypes.DELETE_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        employees: removeEmployee(state.employees, action.payload)
+      };
     case EmpolyeeActionTypes.FETCH_EMPLOYEE_FAILURE:
+    case EmpolyeeActionTypes.CREATE_EMPLOYEE_FAILURE:
+    case EmpolyeeActionTypes.UPDATE_EMPLOYEE_FAILURE:
+    case EmpolyeeActionTypes.DELETE_EMPLOYEE_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload
       };
+
     default:
       return state;
   }

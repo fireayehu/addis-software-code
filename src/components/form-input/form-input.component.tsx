@@ -7,13 +7,17 @@ interface Props {
   name: string;
   placeholder?: string;
   type: string;
+  handleChange?: any;
+  value?: string;
 }
 
 export const FormInput: React.FC<Props> = ({
   label,
   name,
   placeholder,
-  type
+  type,
+  handleChange,
+  value
 }) => (
   <div>
     <label>{label ? label : ''}</label>
@@ -25,6 +29,8 @@ export const FormInput: React.FC<Props> = ({
       p={4}
       mt={3}
       mb={4}
+      onChange={handleChange}
+      value={value}
     />
   </div>
 );

@@ -1,48 +1,51 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
-import { Container } from './add-employee.styles';
+import { Container } from './edit-employee.styles';
 import FormInput from './../../components/form-input/form-input.component';
 import Row from './../../components/row/row.component';
 import Col from './../../components/col/col.component';
 import CustomButton from './../../components/custom-button/custom-button.component';
-import { createEmployeeStart } from './../../redux/employee/empolyee.actions';
-
-import { createStructuredSelector } from 'reselect';
+import { updateEmployeeStart } from './../../redux/employee/empolyee.actions';
+import { Employee } from '../../redux/employee/employee.types';
 import {
+  selectEmployee,
   selectLoading,
   selectError
 } from '../../redux/employee/employee.selectors';
 import Loader from '../../components/loader/loader.component';
+
 interface Props {
-  createEmployeeStart: any;
+  updateEmployeeStart: any;
+  employee: Employee;
   isLoading: boolean;
   error: Error | null;
 }
 
 interface State {
-  employee_first_name: string;
-  employee_last_name: string;
+  id?: string;
+  employee_name: string;
   employee_salary: string;
   employee_age: string;
   profile_image: string;
 }
-class AddEmployeePage extends React.Component<Props, State> {
+class EditEmployeePage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
     this.state = {
-      employee_first_name: '',
-      employee_last_name: '',
-      employee_salary: '',
-      employee_age: '',
-      profile_image: ''
+      id: props.employee.id,
+      employee_name: this.props.employee.employee_name,
+      employee_salary: this.props.employee.employee_salary,
+      employee_age: this.props.employee.employee_age,
+      profile_image: this.props.employee.profile_image
     };
   }
   handleSubmit = async (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();
 
-    await this.props.createEmployeeStart({
-      employee_name: `${this.state.employee_first_name} ${this.state.employee_last_name}`,
+    await this.props.updateEmployeeStart({
+      id: this.state.id,
+      employee_name: this.state.employee_name,
       employee_salary: this.state.employee_salary,
       employee_age: this.state.employee_age,
       profile_image: this.state.profile_image
@@ -56,8 +59,7 @@ class AddEmployeePage extends React.Component<Props, State> {
   };
   render() {
     const {
-      employee_first_name,
-      employee_last_name,
+      employee_name,
       employee_age,
       employee_salary,
       profile_image
@@ -70,24 +72,14 @@ class AddEmployeePage extends React.Component<Props, State> {
         <Container p={4} bg="gray.2">
           <form onSubmit={this.handleSubmit}>
             <Row width="100%">
-              <Col width="45%" p={4}>
+              <Col width="93%" p={4}>
                 <FormInput
-                  label="First Name"
-                  name="employee_first_name"
+                  label="Full Name"
+                  name="employee_name"
                   type="text"
                   handleChange={this.handleChange}
-                  value={employee_first_name}
+                  value={employee_name}
                   placeholder="John"
-                />
-              </Col>
-              <Col width="45%" p={4}>
-                <FormInput
-                  label="Last Name"
-                  name="employee_last_name"
-                  type="text"
-                  placeholder="Doe"
-                  handleChange={this.handleChange}
-                  value={employee_last_name}
                 />
               </Col>
               <Col width="93%" p={4}>
@@ -123,7 +115,7 @@ class AddEmployeePage extends React.Component<Props, State> {
               <Col width="80%" p={4}></Col>
               <Col width="10%" p={4}>
                 <CustomButton
-                  text="Save"
+                  text="Update"
                   type="submit"
                   bg="green.0"
                   color="white"
@@ -137,12 +129,14 @@ class AddEmployeePage extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  isLoading: selectLoading,
-  error: selectError
+const mapStateToProps = (state: any, ownProps: any) => ({
+  employee: selectEmployee(ownProps.match.params.id)(state),
+  isLoading: selectLoading(state),
+  error: selectError(state)
 });
+
 const mapDispatchToProps = (dispatch: any) => ({
-  createEmployeeStart: (employee: any) =>
-    dispatch(createEmployeeStart(employee))
+  updateEmployeeStart: (employee: any) =>
+    dispatch(updateEmployeeStart(employee))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(AddEmployeePage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditEmployeePage);

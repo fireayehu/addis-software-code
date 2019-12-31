@@ -45,7 +45,7 @@ interface FetchEmployeeFailure {
 //CREATE
 interface CreateEmployeeStart {
   type: typeof EmpolyeeActionTypes.CREATE_EMPLOYEE_START;
-  payload?: any;
+  payload: Employee;
 }
 
 interface CreateEmployeeSuccess {
@@ -61,7 +61,7 @@ interface CreateEmployeeFailure {
 //UPDATE
 interface UpdateFetchEmployeeStart {
   type: typeof EmpolyeeActionTypes.UPDATE_EMPLOYEE_START;
-  payload?: any;
+  payload: Employee;
 }
 
 interface UpdateEmployeeSuccess {
@@ -77,7 +77,7 @@ interface UpdateEmployeeFailure {
 //DELETE
 interface DeleteEmployeeStart {
   type: typeof EmpolyeeActionTypes.DELETE_EMPLOYEE_START;
-  payload?: any;
+  payload: Employee;
 }
 
 interface DeleteEmployeeSuccess {

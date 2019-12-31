@@ -3,17 +3,27 @@ import {
   layout,
   space,
   color,
+  fontSize,
+  background,
   LayoutProps,
   SpaceProps,
-  ColorProps
+  ColorProps,
+  BackgroundProps,
+  FontSizeProps
 } from 'styled-system';
 
-interface CardProps extends LayoutProps, SpaceProps, ColorProps {}
+interface CardProps
+  extends LayoutProps,
+    SpaceProps,
+    ColorProps,
+    BackgroundProps,
+    FontSizeProps {}
 export const CardContainer = styled.div<CardProps>`
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
   ${layout}
+  ${background}
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
@@ -21,11 +31,25 @@ export const CardContainer = styled.div<CardProps>`
 
 export const Image = styled.img<CardProps>`
   ${layout}
-  border-radius: 5px 5px 0 0;
+  ${space}
+  border-radius: 50%;
+`;
+
+export const CardTitle = styled.h4<CardProps>`
+  ${space}
+  ${color}
+  ${fontSize}
+`;
+
+export const CardText = styled.p<CardProps>`
+  ${space}
+  ${color}
+  ${fontSize}
 `;
 
 export const ContentContainer = styled.div<CardProps>`
   ${space}
+  ${layout}
 `;
 
 export const CardButton = styled.button<CardProps>`
@@ -35,11 +59,10 @@ export const CardButton = styled.button<CardProps>`
     box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
     transition: all 0.4s ease 0s;
   }
-  color: #000;
+  color: #fff;
   text-transform: uppercase;
-  background: #fff;
+  background: #818181;
   ${space}
-  border-radius: 5px;
   border: none;
   transition: all 0.4s ease 0s;
 `;

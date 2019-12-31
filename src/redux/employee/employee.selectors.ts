@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { Employee } from './employee.types';
 
 const selectEmployeeState = (state: any) => state.employee;
 
@@ -11,3 +12,12 @@ export const selectLoading = createSelector(
   [selectEmployeeState],
   employeeState => employeeState.loading
 );
+export const selectError = createSelector(
+  [selectEmployeeState],
+  employeeState => employeeState.error
+);
+
+export const selectEmployee = (id: string) =>
+  createSelector([selectEmployees], employess =>
+    employess.find((employee: Employee) => employee.id === id)
+  );
