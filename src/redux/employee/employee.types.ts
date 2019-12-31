@@ -10,7 +10,8 @@ export const EmpolyeeActionTypes = {
   UPDATE_EMPLOYEE_FAILURE: 'UPDATE_EMPLOYEE_FAILURE',
   DELETE_EMPLOYEE_START: 'DELETE_EMPLOYEE_START',
   DELETE_EMPLOYEE_SUCCESS: 'DELETE_EMPLOYEE_SUCCESS',
-  DELETE_EMPLOYEE_FAILURE: 'DELETE_EMPLOYEE_FAILURE'
+  DELETE_EMPLOYEE_FAILURE: 'DELETE_EMPLOYEE_FAILURE',
+  SET_SUCCESSFUL: 'SET_SUCCESSFUL'
 };
 export interface Employee {
   id?: string;
@@ -24,6 +25,7 @@ export interface EmployeeState {
   employees: Employee[];
   loading: boolean;
   error: any;
+  successful: boolean;
 }
 
 //FETCH

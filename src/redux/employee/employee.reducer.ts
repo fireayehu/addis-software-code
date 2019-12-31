@@ -8,7 +8,8 @@ import { removeEmployee, updateEmployee } from './employee.util';
 const INITIAL_STATE: EmployeeState = {
   employees: [],
   loading: false,
-  error: null
+  error: null,
+  successful: false
 };
 
 const employeeReducer = (
@@ -34,12 +35,14 @@ const employeeReducer = (
       return {
         ...state,
         loading: false,
+        successful: true,
         employees: [...state.employees, action.payload]
       };
     case EmpolyeeActionTypes.UPDATE_EMPLOYEE_SUCCESS:
       return {
         ...state,
         loading: false,
+        successful: true,
         employees: updateEmployee(state.employees, action.payload)
       };
     case EmpolyeeActionTypes.DELETE_EMPLOYEE_SUCCESS:
@@ -57,7 +60,11 @@ const employeeReducer = (
         loading: false,
         error: action.payload
       };
-
+    case EmpolyeeActionTypes.SET_SUCCESSFUL:
+      return {
+        ...state,
+        successful: false
+      };
     default:
       return state;
   }

@@ -17,6 +17,11 @@ export const selectError = createSelector(
   employeeState => employeeState.error
 );
 
+export const selectSuccessful = createSelector(
+  [selectEmployeeState],
+  employeeState => employeeState.successful
+);
+
 export const selectEmployee = (id: string) =>
   createSelector([selectEmployees], employess =>
     employess.find((employee: Employee) => employee.id === id)

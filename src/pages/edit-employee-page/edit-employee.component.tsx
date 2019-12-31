@@ -1,23 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import { Container } from './edit-employee.styles';
 import FormInput from './../../components/form-input/form-input.component';
 import Row from './../../components/row/row.component';
 import Col from './../../components/col/col.component';
 import CustomButton from './../../components/custom-button/custom-button.component';
-import { updateEmployeeStart } from './../../redux/employee/empolyee.actions';
+import {
+  updateEmployeeStart,
+  setSuccessfulStart
+} from './../../redux/employee/empolyee.actions';
 import { Employee } from '../../redux/employee/employee.types';
 import {
   selectEmployee,
   selectLoading,
-  selectError
+  selectError,
+  selectSuccessful
 } from '../../redux/employee/employee.selectors';
 import Loader from '../../components/loader/loader.component';
 
 interface Props {
   updateEmployeeStart: any;
+  setSuccessfulStart: any;
   employee: Employee;
   isLoading: boolean;
+  successful: boolean;
   error: Error | null;
 }
 
@@ -57,6 +67,17 @@ class EditEmployeePage extends React.Component<Props, State> {
       this.setState({ [name]: value } as Pick<State, keyof State>);
     }
   };
+  handleSuccesfull = () => {
+    confirmAlert({
+      message: 'Employee Edited Succesfully',
+      buttons: [
+        {
+          label: 'OK',
+          onClick: () => this.props.setSuccessfulStart()
+        }
+      ]
+    });
+  };
   render() {
     const {
       employee_name,
@@ -64,12 +85,13 @@ class EditEmployeePage extends React.Component<Props, State> {
       employee_salary,
       profile_image
     } = this.state;
-    const { isLoading } = this.props;
+    const { isLoading, successful } = this.props;
     if (isLoading) {
       return <Loader />;
     } else {
       return (
         <Container p={4} bg="gray.2">
+          {successful && this.handleSuccesfull()}
           <form onSubmit={this.handleSubmit}>
             <Row width="100%">
               <Col width="93%" p={4}>
@@ -132,11 +154,13 @@ class EditEmployeePage extends React.Component<Props, State> {
 const mapStateToProps = (state: any, ownProps: any) => ({
   employee: selectEmployee(ownProps.match.params.id)(state),
   isLoading: selectLoading(state),
-  error: selectError(state)
+  error: selectError(state),
+  successful: selectSuccessful(state)
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
   updateEmployeeStart: (employee: any) =>
-    dispatch(updateEmployeeStart(employee))
+    dispatch(updateEmployeeStart(employee)),
+  setSuccessfulStart: () => dispatch(setSuccessfulStart())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EditEmployeePage);

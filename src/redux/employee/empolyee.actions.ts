@@ -4,6 +4,12 @@ import {
   Employee
 } from './employee.types';
 
+//
+export const setSuccessfulStart = () => ({
+  type: EmpolyeeActionTypes.SET_SUCCESSFUL
+});
+//FETCH
+
 export const fetchEmployeeStart = () => ({
   type: EmpolyeeActionTypes.FETCH_EMPLOYEE_START
 });

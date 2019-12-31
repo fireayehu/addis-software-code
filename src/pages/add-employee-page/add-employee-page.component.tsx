@@ -1,22 +1,31 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import { Container } from './add-employee.styles';
 import FormInput from './../../components/form-input/form-input.component';
 import Row from './../../components/row/row.component';
 import Col from './../../components/col/col.component';
 import CustomButton from './../../components/custom-button/custom-button.component';
-import { createEmployeeStart } from './../../redux/employee/empolyee.actions';
+import {
+  createEmployeeStart,
+  setSuccessfulStart
+} from './../../redux/employee/empolyee.actions';
 
 import { createStructuredSelector } from 'reselect';
 import {
   selectLoading,
-  selectError
+  selectError,
+  selectSuccessful
 } from '../../redux/employee/employee.selectors';
 import Loader from '../../components/loader/loader.component';
 interface Props {
   createEmployeeStart: any;
+  setSuccessfulStart: any;
   isLoading: boolean;
+  successful: boolean;
   error: Error | null;
 }
 
@@ -54,6 +63,17 @@ class AddEmployeePage extends React.Component<Props, State> {
       this.setState({ [name]: value } as Pick<State, keyof State>);
     }
   };
+  handleSuccesfull = () => {
+    confirmAlert({
+      message: 'Employee Added Succesfully',
+      buttons: [
+        {
+          label: 'OK',
+          onClick: () => this.props.setSuccessfulStart()
+        }
+      ]
+    });
+  };
   render() {
     const {
       employee_first_name,
@@ -62,12 +82,13 @@ class AddEmployeePage extends React.Component<Props, State> {
       employee_salary,
       profile_image
     } = this.state;
-    const { isLoading } = this.props;
+    const { isLoading, successful } = this.props;
     if (isLoading) {
       return <Loader />;
     } else {
       return (
         <Container p={4} bg="gray.2">
+          {successful && this.handleSuccesfull()}
           <form onSubmit={this.handleSubmit}>
             <Row width="100%">
               <Col width="45%" p={4}>
@@ -139,10 +160,12 @@ class AddEmployeePage extends React.Component<Props, State> {
 
 const mapStateToProps = createStructuredSelector({
   isLoading: selectLoading,
+  successful: selectSuccessful,
   error: selectError
 });
 const mapDispatchToProps = (dispatch: any) => ({
   createEmployeeStart: (employee: any) =>
-    dispatch(createEmployeeStart(employee))
+    dispatch(createEmployeeStart(employee)),
+  setSuccessfulStart: () => dispatch(setSuccessfulStart())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddEmployeePage);
